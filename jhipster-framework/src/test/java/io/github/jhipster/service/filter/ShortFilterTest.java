@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,13 +19,13 @@
 
 package io.github.jhipster.service.filter;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShortFilterTest {
 

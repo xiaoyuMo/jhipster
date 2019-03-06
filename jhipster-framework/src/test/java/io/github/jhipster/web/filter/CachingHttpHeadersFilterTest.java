@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,22 +19,24 @@
 
 package io.github.jhipster.web.filter;
 
+import io.github.jhipster.config.JHipsterProperties;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+
+import javax.servlet.FilterChain;
+import java.util.concurrent.TimeUnit;
+
 import static io.github.jhipster.web.filter.CachingHttpHeadersFilter.DEFAULT_DAYS_TO_LIVE;
-import static io.github.jhipster.web.filter.CachingHttpHeadersFilter.LAST_MODIFIED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-
-import java.util.concurrent.TimeUnit;
-import javax.servlet.FilterChain;
-
-import org.junit.*;
-import org.springframework.mock.web.*;
-
-import io.github.jhipster.config.JHipsterProperties;
 
 public class CachingHttpHeadersFilterTest {
 
@@ -78,7 +80,6 @@ public class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
         assertThat(response.getDateHeader("Expires")).isBetween(before + secsToLive, after + secsToLive);
-        verify(response).setDateHeader("Last-Modified", LAST_MODIFIED);
         assertThat(caught).isNull();
     }
 
@@ -104,7 +105,6 @@ public class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
         assertThat(response.getDateHeader("Expires")).isBetween(before + secsToLive, after + secsToLive);
-        verify(response).setDateHeader("Last-Modified", LAST_MODIFIED);
         assertThat(caught).isNull();
     }
 }

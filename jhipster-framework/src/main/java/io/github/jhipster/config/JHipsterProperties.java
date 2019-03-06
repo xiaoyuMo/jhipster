@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,14 +19,14 @@
 
 package io.github.jhipster.config;
 
-import java.util.List;
-import java.util.Map;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.cors.CorsConfiguration;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Properties specific to JHipster.
@@ -65,6 +65,8 @@ public class JHipsterProperties {
     private final Gateway gateway = new Gateway();
 
     private final Registry registry = new Registry();
+
+    private final ClientApp clientApp = new ClientApp();
 
     public Async getAsync() {
         return async;
@@ -114,6 +116,10 @@ public class JHipsterProperties {
         return gateway;
     }
 
+    public ClientApp getClientApp() {
+        return clientApp;
+    }
+
     public static class Async {
 
         private int corePoolSize = JHipsterDefaults.Async.corePoolSize;
@@ -149,30 +155,10 @@ public class JHipsterProperties {
 
     public static class Http {
 
-        public enum Version {V_1_1, V_2_0}
-
         private final Cache cache = new Cache();
-
-        /**
-         * Https has to be active with cipher suite define also
-         */
-        private boolean useUndertowUserCipherSuitesOrder = JHipsterDefaults.Http.useUndertowUserCipherSuitesOrder;
-
-        /**
-         * HTTP version, must be "V_1_1" (for HTTP/1.1) or V_2_0 (for (HTTP/2)
-         */
-        public Version version = JHipsterDefaults.Http.version;
 
         public Cache getCache() {
             return cache;
-        }
-
-        public Version getVersion() {
-            return version;
-        }
-
-        public void setVersion(Version version) {
-            this.version = version;
         }
 
         public static class Cache {
@@ -186,14 +172,6 @@ public class JHipsterProperties {
             public void setTimeToLiveInDays(int timeToLiveInDays) {
                 this.timeToLiveInDays = timeToLiveInDays;
             }
-        }
-
-        public boolean isUseUndertowUserCipherSuitesOrder() {
-            return useUndertowUserCipherSuitesOrder;
-        }
-
-        public void setUseUndertowUserCipherSuitesOrder(boolean useUndertowUserCipherSuitesOrder) {
-            this.useUndertowUserCipherSuitesOrder = useUndertowUserCipherSuitesOrder;
         }
     }
 
@@ -241,7 +219,7 @@ public class JHipsterProperties {
 
                 private int updateInterval = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
 
-                private String url =  JHipsterDefaults.Cache.Hazelcast.ManagementCenter.url;
+                private String url = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.url;
 
                 public boolean isEnabled() {
                     return enabled;
@@ -668,7 +646,7 @@ public class JHipsterProperties {
         private String host = JHipsterDefaults.Swagger.host;
 
         private String[] protocols = JHipsterDefaults.Swagger.protocols;
-        
+
         private boolean useDefaultResponseMessages = JHipsterDefaults.Swagger.useDefaultResponseMessages;
 
         public String getTitle() {
@@ -778,35 +756,10 @@ public class JHipsterProperties {
 
     public static class Metrics {
 
-        private final Jmx jmx = new Jmx();
-
         private final Logs logs = new Logs();
-
-        private final Prometheus prometheus = new Prometheus();
-
-        public Jmx getJmx() {
-            return jmx;
-        }
 
         public Logs getLogs() {
             return logs;
-        }
-
-        public Prometheus getPrometheus() {
-            return prometheus;
-        }
-
-        public static class Jmx {
-
-            private boolean enabled = JHipsterDefaults.Metrics.Jmx.enabled;
-
-            public boolean isEnabled() {
-                return enabled;
-            }
-
-            public void setEnabled(boolean enabled) {
-                this.enabled = enabled;
-            }
         }
 
         public static class Logs {
@@ -829,29 +782,6 @@ public class JHipsterProperties {
 
             public void setReportFrequency(long reportFrequency) {
                 this.reportFrequency = reportFrequency;
-            }
-        }
-
-        public static class Prometheus {
-
-            private boolean enabled = JHipsterDefaults.Metrics.Prometheus.enabled;
-
-            private String endpoint = JHipsterDefaults.Metrics.Prometheus.endpoint;
-
-            public boolean isEnabled() {
-                return enabled;
-            }
-
-            public void setEnabled(boolean enabled) {
-                this.enabled = enabled;
-            }
-
-            public String getEndpoint() {
-                return endpoint;
-            }
-
-            public void setEndpoint(String endpoint) {
-                this.endpoint = endpoint;
             }
         }
     }
@@ -984,6 +914,19 @@ public class JHipsterProperties {
 
         public void setPassword(String password) {
             this.password = password;
+        }
+    }
+
+    public static class ClientApp {
+
+        private String name = JHipsterDefaults.ClientApp.name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

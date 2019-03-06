@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,14 +19,14 @@
 
 package io.github.jhipster.config;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 public class JHipsterPropertiesTest {
 
@@ -90,18 +90,6 @@ public class JHipsterPropertiesTest {
         val++;
         obj.setQueueCapacity(val);
         assertThat(obj.getQueueCapacity()).isEqualTo(val);
-    }
-
-    @Test
-    public void testHttpVersion() {
-        JHipsterProperties.Http.Version[] versions = JHipsterProperties.Http.Version.values();
-        JHipsterProperties.Http obj = properties.getHttp();
-        String str = JHipsterDefaults.Http.version.toString();
-        JHipsterProperties.Http.Version val = JHipsterProperties.Http.Version.valueOf(str);
-        assertThat(obj.getVersion()).isEqualTo(val);
-        val = versions[(1 + val.ordinal()) % versions.length];
-        obj.setVersion(val);
-        assertThat(obj.getVersion()).isEqualTo(val);
     }
 
     @Test
@@ -579,16 +567,6 @@ public class JHipsterPropertiesTest {
     }
 
     @Test
-    public void testMetricsJmxEnabled() {
-        JHipsterProperties.Metrics.Jmx obj = properties.getMetrics().getJmx();
-        boolean val = JHipsterDefaults.Metrics.Jmx.enabled;
-        assertThat(obj.isEnabled()).isEqualTo(val);
-        val = !val;
-        obj.setEnabled(val);
-        assertThat(obj.isEnabled()).isEqualTo(val);
-    }
-
-    @Test
     public void testMetricsLogsEnabled() {
         JHipsterProperties.Metrics.Logs obj = properties.getMetrics().getLogs();
         boolean val = JHipsterDefaults.Metrics.Logs.enabled;
@@ -606,25 +584,6 @@ public class JHipsterPropertiesTest {
         val++;
         obj.setReportFrequency(val);
         assertThat(obj.getReportFrequency()).isEqualTo(val);
-    }
-
-    @Test
-    public void testMetricsPrometheusEnabled() {
-        JHipsterProperties.Metrics.Prometheus obj = properties.getMetrics().getPrometheus();
-        boolean val = JHipsterDefaults.Metrics.Prometheus.enabled;
-        assertThat(obj.isEnabled()).isEqualTo(val);
-        val = !val;
-        obj.setEnabled(val);
-        assertThat(obj.isEnabled()).isEqualTo(val);
-    }
-
-    @Test
-    public void testMetricsPrometheusEndpoint() {
-        JHipsterProperties.Metrics.Prometheus obj = properties.getMetrics().getPrometheus();
-        String val = JHipsterDefaults.Metrics.Prometheus.endpoint;
-        assertThat(obj.getEndpoint()).isEqualTo(val);
-        obj.setEndpoint(val);
-        assertThat(obj.getEndpoint()).isEqualTo(val);
     }
 
     @Test
@@ -728,12 +687,12 @@ public class JHipsterPropertiesTest {
     }
 
     @Test
-    public void testHttpUseUndertowUserCipherSuitesOrder(){
-        JHipsterProperties.Http obj = properties.getHttp();
-        boolean val = JHipsterDefaults.Http.useUndertowUserCipherSuitesOrder;
-        assertThat(obj.isUseUndertowUserCipherSuitesOrder()).isEqualTo(val);
-        val = !val;
-        obj.setUseUndertowUserCipherSuitesOrder(val);
-        assertThat(obj.isUseUndertowUserCipherSuitesOrder()).isEqualTo(val);
+    public void testClientAppName() {
+        JHipsterProperties.ClientApp obj = properties.getClientApp();
+        String val = JHipsterDefaults.ClientApp.name;
+        assertThat(obj.getName()).isEqualTo(val);
+        val = "1" + val;
+        obj.setName(val);
+        assertThat(obj.getName()).isEqualTo(val);
     }
 }

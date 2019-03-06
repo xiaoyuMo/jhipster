@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,12 +19,12 @@
 
 package io.github.jhipster.web.filter;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import io.github.jhipster.config.JHipsterProperties;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
-
-import io.github.jhipster.config.JHipsterProperties;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This filter is used in production, to put HTTP cache headers with a long (4 years) expiration time.
@@ -33,9 +33,6 @@ public class CachingHttpHeadersFilter implements Filter {
 
     public static final int DEFAULT_DAYS_TO_LIVE = 1461; // 4 years
     public static final long DEFAULT_SECONDS_TO_LIVE = TimeUnit.DAYS.toMillis(DEFAULT_DAYS_TO_LIVE);
-
-    // We consider the last modified date is the start up time of the server
-    public final static long LAST_MODIFIED = System.currentTimeMillis();
 
     private long cacheTimeToLive = DEFAULT_SECONDS_TO_LIVE;
 
@@ -66,9 +63,6 @@ public class CachingHttpHeadersFilter implements Filter {
 
         // Setting Expires header, for proxy caching
         httpResponse.setDateHeader("Expires", cacheTimeToLive + System.currentTimeMillis());
-
-        // Setting the Last-Modified header, for browser caching
-        httpResponse.setDateHeader("Last-Modified", LAST_MODIFIED);
 
         chain.doFilter(request, response);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,10 +19,10 @@
 
 package io.github.jhipster.domain.util;
 
+import org.springframework.core.convert.converter.Converter;
+
 import java.time.*;
 import java.util.Date;
-
-import org.springframework.core.convert.converter.Converter;
 
 public final class JSR310DateConverters {
 
@@ -105,6 +105,32 @@ public final class JSR310DateConverters {
         @Override
         public LocalDateTime convert(Date source) {
             return source == null ? null : LocalDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault());
+        }
+    }
+
+    public static class DurationToLongConverter implements Converter<Duration, Long> {
+
+        public static final DurationToLongConverter INSTANCE = new DurationToLongConverter();
+
+        private DurationToLongConverter() {
+        }
+
+        @Override
+        public Long convert(Duration source) {
+            return source == null ? null : source.toMillis();
+        }
+    }
+
+    public static class LongToDurationConverter implements Converter<Long, Duration> {
+
+        public static final LongToDurationConverter INSTANCE = new LongToDurationConverter();
+
+        private LongToDurationConverter() {
+        }
+
+        @Override
+        public Duration convert(Long source) {
+            return source == null ? null : Duration.ofMillis(source);
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors.
+ * Copyright 2016-2019 the original author or authors.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,10 +19,10 @@
 
 package io.github.jhipster.service.filter;
 
-import java.time.Instant;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import java.time.Instant;
 
 /**
  * Filter class for {@link Instant} type attributes.

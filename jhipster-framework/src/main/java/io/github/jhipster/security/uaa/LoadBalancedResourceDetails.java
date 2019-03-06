@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,14 +19,14 @@
 
 package io.github.jhipster.security.uaa;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @ConditionalOnMissingBean
 public class LoadBalancedResourceDetails extends ClientCredentialsResourceDetails {

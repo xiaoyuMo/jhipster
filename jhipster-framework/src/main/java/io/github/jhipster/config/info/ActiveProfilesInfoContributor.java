@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -28,9 +28,8 @@ import java.util.List;
 
 /**
  * An {@link InfoContributor} that exposes the list of active spring profiles.
- *
  */
-public class ActiveProfilesInfoContributor  implements InfoContributor {
+public class ActiveProfilesInfoContributor implements InfoContributor {
 
     private static final String ACTIVE_PROFILES = "activeProfiles";
     private final List<String> profiles;

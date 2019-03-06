@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2018 the original author or authors from the JHipster project.
+ * Copyright 2016-2019 the original author or authors from the JHipster project.
  *
  * This file is part of the JHipster project, see https://www.jhipster.tech/
  * for more information.
@@ -19,16 +19,23 @@
 
 package io.github.jhipster.domain.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import io.github.jhipster.test.LogbackRecorder;
+import org.hibernate.dialect.Dialect;
+import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
+import org.hibernate.type.descriptor.sql.BlobTypeDescriptor;
+import org.hibernate.type.descriptor.sql.BooleanTypeDescriptor;
+import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.Types;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import org.hibernate.dialect.Dialect;
-import org.hibernate.type.descriptor.sql.*;
-import org.junit.*;
-
-import io.github.jhipster.test.LogbackRecorder;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FixedPostgreSQL82DialectTest {
 
